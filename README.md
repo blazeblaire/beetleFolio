@@ -1,43 +1,157 @@
-# Astro Starter Kit: Minimal
+# beetleFolio — Tonny Blaire's Portfolio
 
-```sh
-npm create astro@latest -- --template minimal
+Personal portfolio site built with Astro, Tailwind CSS v4, and TypeScript. Deploys automatically to Vercel on every push to `master`.
+
+## Commands
+
+| Command | What it does |
+|---|---|
+| `npm install` | Install dependencies |
+| `npm run dev` | Start dev server at `localhost:4321` |
+| `npm run build` | Build to `dist/` |
+| `npm run preview` | Preview the production build locally |
+
+---
+
+## Adding a project
+
+Open `src/data/projects.ts` and append an object to the `projects` array:
+
+```ts
+{
+  title: "Your Project Name",
+  year: 2025,
+  description: "One or two sentences — what it does and who it's for.",
+  tags: ["Python", "FastAPI", "React"],         // shown as pills on the card
+  repo: "https://github.com/blazeblaire/repo",
+  // demo: "https://live-url.com",              // omit for backend-only projects
+  highlights: [
+    "Specific metric or outcome — be concrete",
+    "Another measurable result",
+  ],
+},
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+**Notes:**
+- `demo` is optional. Omitting it shows a `server-side` badge instead of a broken link.
+- `highlights` renders as a bulleted list — lead with numbers, not descriptions.
+- Projects display in array order. Keep newest first.
 
-## 🚀 Project Structure
+---
 
-Inside of your Astro project, you'll see the following folders and files:
+## Editing existing content
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+| What to change | File | Where |
+|---|---|---|
+| Bio paragraph | `src/components/About.astro` | `<p>` block around line 56 |
+| Skills list | `src/components/About.astro` | `skillGroups` array in the frontmatter |
+| Hero tagline | `src/components/Hero.astro` | `<p>` starting "Building production backend…" |
+| Availability text | `src/components/Hero.astro` | `<span>` reading "Available for remote…" |
+| Experience / education | `src/data/experience.ts` | Add or edit objects in the `timeline` array |
+| Contact links | `src/components/ContactSection.astro` | `contactLinks` array in the frontmatter |
+| Page title + meta description | `src/layouts/BaseLayout.astro` | `title` and `description` default props (lines 14–16) |
+| Canonical URL / OG base | `astro.config.mjs` | `site:` value |
+
+### Adding an experience or education item
+
+Edit `src/data/experience.ts`:
+
+```ts
+// Work experience
+{
+  type: "experience",
+  title: "Job Title",
+  org: "Company Name",
+  location: "City, Country · remote",
+  period: "Jan 2025 – Present",
+  bullets: [
+    "What you shipped or improved — include a metric.",
+    "Another responsibility.",
+  ],
+},
+
+// Education
+{
+  type: "education",
+  title: "Degree or Certificate",
+  org: "Institution",
+  location: "City, Country",
+  period: "Sep 2023 – Jun 2025",
+  bullets: ["Subjects · Tools · Frameworks studied"],
+},
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Items with `type: "experience"` appear in the Experience column; `type: "education"` in the Education column. Order within each column follows array order — newest first.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+---
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Swapping the CV PDF
 
-## 🧞 Commands
+1. Export your updated CV as a PDF.
+2. Rename it `cv.pdf`.
+3. Drop it into `public/`, replacing the existing file.
 
-All commands are run from the root of the project, from a terminal:
+The "Download CV" button links to `/cv.pdf` and never needs to change.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+---
 
-## 👀 Want to learn more?
+## Activating the contact form
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+The form points to a placeholder endpoint until you replace it:
+
+1. Create a free account at [formspree.io](https://formspree.io).
+2. Create a new form and copy the 8-character ID (e.g. `xyzabcde`).
+3. Open `src/components/ContactSection.astro`, line 10:
+   ```ts
+   const FORMSPREE_ENDPOINT = "https://formspree.io/f/xyzabcde";
+   ```
+4. Commit and push — the form goes live on the next deploy.
+
+---
+
+## Redeploying
+
+With Vercel's GitHub integration, **every push to `master` triggers a deploy automatically.**
+
+```bash
+git add src/data/projects.ts   # or whichever files changed
+git commit -m "feat: add new project"
+git push
+```
+
+Vercel runs `npm run build`, promotes `dist/` to the CDN, and the site is live — usually within 60 seconds.
+
+**Force a redeploy without code changes:**
+```bash
+git commit --allow-empty -m "chore: trigger redeploy"
+git push
+```
+
+**After connecting a custom domain**, update the site URL in `astro.config.mjs` so canonical links and OG tags are correct:
+```js
+site: 'https://your-domain.com',
+```
+Then commit and push.
+
+---
+
+## Project structure
+
+```
+src/
+  components/       one file per section of the page
+  data/
+    projects.ts     add / remove projects here
+    experience.ts   experience and education timeline
+  layouts/
+    BaseLayout.astro  HTML shell, SEO meta, dark-mode init
+  pages/
+    index.astro     assembles all sections (rarely needs touching)
+  styles/
+    global.css      Tailwind entry, fonts, design tokens
+public/
+  cv.pdf            drop your PDF here
+  og.png            1200×630 px — required for social link previews
+  favicon.svg
+  favicon.ico
+```
