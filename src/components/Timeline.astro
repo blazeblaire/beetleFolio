@@ -16,7 +16,7 @@ const educationItems = timeline.filter((i) => i.type === "education");
     <p
       aria-hidden="true"
       class="font-mono text-xs uppercase tracking-widest
-             text-zinc-400 dark:text-slate-500 mb-3"
+             text-zinc-500 dark:text-slate-400 mb-3"
     >
       Career
     </p>
@@ -38,7 +38,7 @@ const educationItems = timeline.filter((i) => i.type === "education");
       <div>
         <h3
           class="font-mono text-xs uppercase tracking-widest
-                 text-zinc-400 dark:text-slate-500 mb-8"
+                 text-zinc-500 dark:text-slate-400 mb-8"
         >
           Experience
         </h3>
@@ -65,7 +65,7 @@ const educationItems = timeline.filter((i) => i.type === "education");
                     {item.title}
                   </h4>
                   <time
-                    class="font-mono text-xs text-zinc-400 dark:text-slate-500 shrink-0 tabular-nums"
+                    class="font-mono text-xs text-zinc-500 dark:text-slate-400 shrink-0 tabular-nums"
                     datetime={item.period}
                   >
                     {item.period}
@@ -99,7 +99,7 @@ const educationItems = timeline.filter((i) => i.type === "education");
       <div>
         <h3
           class="font-mono text-xs uppercase tracking-widest
-                 text-zinc-400 dark:text-slate-500 mb-8"
+                 text-zinc-500 dark:text-slate-400 mb-8"
         >
           Education
         </h3>
@@ -127,7 +127,7 @@ const educationItems = timeline.filter((i) => i.type === "education");
                     {item.title}
                   </h4>
                   <time
-                    class="font-mono text-xs text-zinc-400 dark:text-slate-500 shrink-0 tabular-nums"
+                    class="font-mono text-xs text-zinc-500 dark:text-slate-400 shrink-0 tabular-nums"
                     datetime={item.period}
                   >
                     {item.period}
@@ -141,7 +141,7 @@ const educationItems = timeline.filter((i) => i.type === "education");
 
                 {/* Curriculum — single descriptive line */}
                 {item.bullets.map((b) => (
-                  <p class="text-sm text-zinc-500 dark:text-slate-500 leading-relaxed">
+                  <p class="text-sm text-zinc-500 dark:text-slate-400 leading-relaxed">
                     {b}
                   </p>
                 ))}

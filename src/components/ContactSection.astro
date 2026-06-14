@@ -49,7 +49,7 @@ const contactLinks = [
     <p
       aria-hidden="true"
       class="font-mono text-xs uppercase tracking-widest
-             text-zinc-400 dark:text-slate-500 mb-3"
+             text-zinc-500 dark:text-slate-400 mb-3"
     >
       Contact
     </p>
@@ -83,14 +83,14 @@ const contactLinks = [
                   aria-label={`${label}: ${value}${subtext ? ` — ${subtext}` : ""}`}
                 >
                   <span
-                    class="mt-0.5 shrink-0 text-zinc-400 dark:text-slate-500
+                    class="mt-0.5 shrink-0 text-zinc-500 dark:text-slate-400
                            group-hover:text-blue-500 dark:group-hover:text-blue-400
                            transition-colors duration-150"
                     set:html={icon}
                   />
                   <div>
                     <p class="text-xs font-mono uppercase tracking-wider
-                               text-zinc-400 dark:text-slate-500 mb-0.5">
+                               text-zinc-500 dark:text-slate-400 mb-0.5">
                       {label}
                     </p>
                     <p class="text-sm font-medium text-zinc-800 dark:text-slate-200
@@ -99,7 +99,7 @@ const contactLinks = [
                       {value}
                     </p>
                     {subtext && (
-                      <p class="text-xs text-zinc-400 dark:text-slate-500 mt-0.5">
+                      <p class="text-xs text-zinc-500 dark:text-slate-400 mt-0.5">
                         {subtext}
                       </p>
                     )}
@@ -108,19 +108,19 @@ const contactLinks = [
               ) : (
                 <div class="flex items-start gap-4">
                   <span
-                    class="mt-0.5 shrink-0 text-zinc-400 dark:text-slate-500"
+                    class="mt-0.5 shrink-0 text-zinc-500 dark:text-slate-400"
                     set:html={icon}
                   />
                   <div>
                     <p class="text-xs font-mono uppercase tracking-wider
-                               text-zinc-400 dark:text-slate-500 mb-0.5">
+                               text-zinc-500 dark:text-slate-400 mb-0.5">
                       {label}
                     </p>
                     <p class="text-sm font-medium text-zinc-800 dark:text-slate-200">
                       {value}
                     </p>
                     {subtext && (
-                      <p class="text-xs text-zinc-400 dark:text-slate-500 mt-0.5">
+                      <p class="text-xs text-zinc-500 dark:text-slate-400 mt-0.5">
                         {subtext}
                       </p>
                     )}
