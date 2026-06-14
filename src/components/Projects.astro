@@ -1,0 +1,62 @@
+---
+import { projects } from "../data/projects";
+import ProjectCard from "./ProjectCard.astro";
+---
+
+<section
+  id="projects"
+  aria-labelledby="projects-heading"
+  class="border-t border-zinc-200 dark:border-slate-800"
+>
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+
+    <!-- Section label -->
+    <p
+      aria-hidden="true"
+      class="font-mono text-xs uppercase tracking-widest
+             text-zinc-400 dark:text-slate-500 mb-3"
+    >
+      Work
+    </p>
+
+    <h2
+      id="projects-heading"
+      class="font-heading text-2xl sm:text-3xl font-semibold
+             text-zinc-900 dark:text-slate-50 mb-10"
+    >
+      Projects
+    </h2>
+
+    <!-- 2-column grid: 1 col mobile → 2 col sm+ -->
+    <ul
+      class="grid gap-5 sm:grid-cols-2"
+      role="list"
+      aria-label="Project portfolio"
+    >
+      {
+        projects.map((project) => (
+          <li>
+            <ProjectCard project={project} />
+          </li>
+        ))
+      }
+    </ul>
+
+    <!-- GitHub profile nudge -->
+    <p class="mt-10 text-sm text-zinc-400 dark:text-slate-500">
+      125+ public repositories on{" "}
+      <a
+        href="https://github.com/blazeblaire"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="underline underline-offset-2 decoration-zinc-300 dark:decoration-slate-600
+               hover:text-zinc-900 dark:hover:text-slate-50
+               hover:decoration-zinc-500 dark:hover:decoration-slate-400
+               transition-colors duration-150"
+      >
+        GitHub
+      </a>.
+    </p>
+
+  </div>
+</section>
