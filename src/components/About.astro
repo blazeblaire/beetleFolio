@@ -1,0 +1,110 @@
+---
+const skillGroups = [
+  {
+    label: "Python & Testing",
+    skills: ["Python", "pytest", "fixtures", "parametrize", "coverage.py", "black-box testing"],
+  },
+  {
+    label: "Backend",
+    skills: ["Flask", "FastAPI", "PostgreSQL", "SQLAlchemy", "REST API design"],
+  },
+  {
+    label: "Frontend",
+    skills: ["React", "TypeScript", "JavaScript", "HTML5", "CSS3", "Responsive Design"],
+  },
+  {
+    label: "Tooling & Infra",
+    skills: ["Docker", "Linux/Bash", "Git", "GitHub", "uv", "pyproject.toml"],
+  },
+  {
+    label: "LLM-assisted Dev",
+    skills: ["Claude Code", "Roo Code", "Cursor"],
+  },
+] as const;
+---
+
+<section
+  id="about"
+  aria-labelledby="about-heading"
+  class="border-t border-zinc-200 dark:border-slate-800"
+>
+  <div
+    class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20"
+  >
+    <!-- Section label -->
+    <p
+      aria-hidden="true"
+      class="font-mono text-xs uppercase tracking-widest
+             text-zinc-400 dark:text-slate-500 mb-3"
+    >
+      About
+    </p>
+
+    <h2
+      id="about-heading"
+      class="font-heading text-2xl sm:text-3xl font-semibold
+             text-zinc-900 dark:text-slate-50 mb-7"
+    >
+      Engineering that ships.
+    </h2>
+
+    <!-- Bio -->
+    <p
+      class="max-w-prose text-base sm:text-[1.0625rem] text-zinc-600 dark:text-slate-300
+             leading-relaxed"
+    >
+      Python-first Full Stack Engineer with 2+ years delivering backend APIs,
+      full-stack web applications, and Docker-based reproducible builds. Daily
+      practitioner of Claude Code and Roo Code for iterative development and
+      test-case generation. Security-aware engineering mindset developed through
+      an internship protecting national ICT infrastructure at ICT Authority Kenya.
+      Comfortable reading C, C++, Rust, and Go with LLM support.
+    </p>
+
+    <!-- Skills -->
+    <div class="mt-12">
+      <h3
+        class="font-mono text-xs uppercase tracking-widest
+               text-zinc-400 dark:text-slate-500 mb-6"
+      >
+        Skills
+      </h3>
+
+      <dl class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          skillGroups.map(({ label, skills }) => (
+            <div>
+              <dt
+                class="text-xs font-medium font-mono
+                       text-zinc-500 dark:text-slate-400
+                       uppercase tracking-wider mb-2.5"
+              >
+                {label}
+              </dt>
+              <dd class="flex flex-wrap gap-1.5">
+                {skills.map((skill) => (
+                  <span
+                    class="inline-block px-2 py-0.5 text-xs rounded
+                           border border-zinc-200 dark:border-slate-700
+                           bg-zinc-100 dark:bg-slate-800
+                           text-zinc-600 dark:text-slate-300"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+
+    <!-- Language note -->
+    <p class="mt-10 text-sm text-zinc-400 dark:text-slate-500">
+      Languages:
+      <span class="text-zinc-600 dark:text-slate-400">English</span>
+      <span class="mx-1 text-zinc-300 dark:text-slate-600" aria-hidden="true">/</span>
+      <span class="text-zinc-600 dark:text-slate-400">Swahili (native)</span>
+    </p>
+  </div>
+</section>
