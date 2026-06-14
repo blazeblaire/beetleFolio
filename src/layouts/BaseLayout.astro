@@ -6,13 +6,20 @@ import "../styles/global.css";
 interface Props {
   title?: string;
   description?: string;
+  /** Absolute URL to a 1200×630 OG image. Drop the file at public/og.png. */
+  ogImage?: string;
 }
 
 const {
   title = "Tonny Blaire — Python-first Full Stack Engineer",
   description =
-    "Python-first Full Stack Engineer available for remote, freelance, and contract work. Backend APIs, full-stack web apps, Docker, security-aware engineering.",
+    "Python-first Full Stack Engineer available for remote, freelance, and contract work. Backend APIs, full-stack web apps, Docker, security-aware engineering. Based in Eldoret, Kenya.",
+  ogImage,
 } = Astro.props;
+
+const siteUrl  = Astro.site?.toString().replace(/\/$/, "") ?? "";
+const canonical = new URL(Astro.url.pathname, siteUrl || Astro.url.origin).href;
+const ogImageUrl = ogImage ?? (siteUrl ? `${siteUrl}/og.png` : "/og.png");
 ---
 
 <!doctype html>
@@ -21,39 +28,51 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <meta name="author" content="Tonny Blaire" />
     <meta name="generator" content={Astro.generator} />
+
     <title>{title}</title>
 
+    <!-- Canonical -->
+    <link rel="canonical" href={canonical} />
+
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={title} />
+    <meta property="og:type"        content="website" />
+    <meta property="og:site_name"   content="Tonny Blaire" />
+    <meta property="og:title"       content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:url"         content={canonical} />
+    <meta property="og:locale"      content="en_US" />
+    <meta property="og:image"       content={ogImageUrl} />
+    <meta property="og:image:width"  content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt"   content="Tonny Blaire — Python-first Full Stack Engineer" />
 
-    <!-- Twitter/X card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
+    <!-- Twitter / X card -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:title"       content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image"       content={ogImageUrl} />
+    <meta name="twitter:image:alt"   content="Tonny Blaire — Python-first Full Stack Engineer" />
 
+    <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
 
     <!--
-      Dark-mode init: runs synchronously before first paint.
-      Prevents FOUC (flash of unstyled/wrong-theme content).
+      Dark-mode init — runs synchronously before first paint.
+      Prevents FOUC (flash of unstyled / wrong-theme content).
     -->
     <script is:inline>
       (function () {
         try {
-          const stored = localStorage.getItem("theme");
-          const prefersDark = window.matchMedia(
-            "(prefers-color-scheme: dark)"
-          ).matches;
+          var stored = localStorage.getItem("theme");
+          var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
           if (stored === "dark" || (!stored && prefersDark)) {
             document.documentElement.classList.add("dark");
           }
         } catch (_) {
-          // localStorage not available (private browsing edge cases)
+          /* localStorage unavailable (private-browsing edge case) */
         }
       })();
     </script>
@@ -62,7 +81,7 @@ const {
   <body
     class="bg-zinc-50 dark:bg-slate-950 text-zinc-900 dark:text-slate-100 min-h-dvh"
   >
-    <!-- Skip link for keyboard users (WCAG 2.4.1) -->
+    <!-- Skip-to-main link (WCAG 2.4.1) -->
     <a
       href="#main"
       class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50
