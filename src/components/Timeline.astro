@@ -1,0 +1,156 @@
+---
+import { timeline } from "../data/experience";
+
+const experienceItems = timeline.filter((i) => i.type === "experience");
+const educationItems = timeline.filter((i) => i.type === "education");
+---
+
+<section
+  id="experience"
+  aria-labelledby="timeline-heading"
+  class="border-t border-zinc-200 dark:border-slate-800"
+>
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+
+    <!-- Section header -->
+    <p
+      aria-hidden="true"
+      class="font-mono text-xs uppercase tracking-widest
+             text-zinc-400 dark:text-slate-500 mb-3"
+    >
+      Career
+    </p>
+    <h2
+      id="timeline-heading"
+      class="font-heading text-2xl sm:text-3xl font-semibold
+             text-zinc-900 dark:text-slate-50 mb-14"
+    >
+      Experience &amp; Education
+    </h2>
+
+    <!--
+      Two-column on lg+: Experience left, Education right.
+      Stacked on mobile/tablet.
+    -->
+    <div class="grid gap-14 lg:grid-cols-2 lg:gap-x-16">
+
+      <!-- ── Experience ──────────────────────────── -->
+      <div>
+        <h3
+          class="font-mono text-xs uppercase tracking-widest
+                 text-zinc-400 dark:text-slate-500 mb-8"
+        >
+          Experience
+        </h3>
+
+        <ul
+          class="relative ml-[3px] border-l border-zinc-200 dark:border-slate-800 space-y-0"
+          role="list"
+        >
+          {
+            experienceItems.map((item) => (
+              <li class="relative pl-7 pb-0 last:pb-0">
+                {/* Dot */}
+                <span
+                  aria-hidden="true"
+                  class="absolute -left-[4px] top-[7px]
+                         h-2 w-2 rounded-full
+                         bg-blue-500 dark:bg-blue-400
+                         ring-2 ring-zinc-50 dark:ring-slate-950"
+                />
+
+                {/* Title + period */}
+                <div class="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-3 mb-1">
+                  <h4 class="font-heading font-semibold text-sm text-zinc-900 dark:text-slate-50 leading-snug">
+                    {item.title}
+                  </h4>
+                  <time
+                    class="font-mono text-xs text-zinc-400 dark:text-slate-500 shrink-0 tabular-nums"
+                    datetime={item.period}
+                  >
+                    {item.period}
+                  </time>
+                </div>
+
+                {/* Org + location */}
+                <p class="text-xs text-zinc-500 dark:text-slate-400 mb-4">
+                  {item.org}&ensp;·&ensp;{item.location}
+                </p>
+
+                {/* Bullets */}
+                <ul class="space-y-2" aria-label={`Responsibilities at ${item.org}`}>
+                  {item.bullets.map((b) => (
+                    <li class="flex gap-2.5 text-sm text-zinc-600 dark:text-slate-400 leading-relaxed">
+                      <span
+                        aria-hidden="true"
+                        class="mt-[5px] shrink-0 h-1 w-1 rounded-full bg-zinc-400 dark:bg-slate-500"
+                      />
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- ── Education ───────────────────────────── -->
+      <div>
+        <h3
+          class="font-mono text-xs uppercase tracking-widest
+                 text-zinc-400 dark:text-slate-500 mb-8"
+        >
+          Education
+        </h3>
+
+        <ul
+          class="relative ml-[3px] border-l border-zinc-200 dark:border-slate-800 space-y-0"
+          role="list"
+        >
+          {
+            educationItems.map((item) => (
+              <li class="relative pl-7 pb-10 last:pb-0">
+                {/* Dot */}
+                <span
+                  aria-hidden="true"
+                  class="absolute -left-[4px] top-[7px]
+                         h-2 w-2 rounded-full
+                         border-2 border-zinc-300 dark:border-slate-600
+                         bg-zinc-50 dark:bg-slate-950
+                         ring-2 ring-zinc-50 dark:ring-slate-950"
+                />
+
+                {/* Title + period */}
+                <div class="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-3 mb-1">
+                  <h4 class="font-heading font-semibold text-sm text-zinc-900 dark:text-slate-50 leading-snug">
+                    {item.title}
+                  </h4>
+                  <time
+                    class="font-mono text-xs text-zinc-400 dark:text-slate-500 shrink-0 tabular-nums"
+                    datetime={item.period}
+                  >
+                    {item.period}
+                  </time>
+                </div>
+
+                {/* Org + location */}
+                <p class="text-xs text-zinc-500 dark:text-slate-400 mb-3">
+                  {item.org}&ensp;·&ensp;{item.location}
+                </p>
+
+                {/* Curriculum — single descriptive line */}
+                {item.bullets.map((b) => (
+                  <p class="text-sm text-zinc-500 dark:text-slate-500 leading-relaxed">
+                    {b}
+                  </p>
+                ))}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
