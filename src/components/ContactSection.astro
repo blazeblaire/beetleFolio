@@ -80,7 +80,7 @@ const contactLinks = [
                     ? { target: "_blank", rel: "noopener noreferrer" }
                     : {})}
                   class="group flex items-start gap-4"
-                  aria-label={`${label}: ${value}${subtext ? ` — ${subtext}` : ""}`}
+                  aria-label={`${label}: ${value}${subtext ? ` — ${subtext}` : ""}${href.startsWith("http") ? " (opens in new tab)" : ""}`}
                 >
                   <span
                     class="mt-0.5 shrink-0 text-zinc-500 dark:text-slate-400
